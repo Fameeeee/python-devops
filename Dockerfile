@@ -11,6 +11,9 @@ RUN adduser --disabled-password --gecos '' appuser
 # ตั้งค่า Directory ทำงาน
 WORKDIR /app
 
+# อัปเกรด pip, wheel และ setuptools เพื่ออุดช่องโหว่ CVE-2026-24049 และอื่นๆ
+RUN pip install --no-cache-dir --upgrade pip wheel setuptools
+
 # ก๊อปปี้ไฟล์ dependencies และติดตั้งก่อนเพื่อใช้ประโยชน์จาก Docker Cache
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
